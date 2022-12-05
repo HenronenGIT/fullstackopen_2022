@@ -9,7 +9,7 @@ const loginRouter = require('./controllers/login')
 const middleware = require('./utils/middleware')
 require('dotenv').config()
 
-const mongoUrl = 'mongodb+srv://henri:henridatabase@cluster1.2vpleqx.mongodb.net/blog_list?retryWrites=true&w=majority'
+const mongoUrl = 'mongodb+srv://henri:<password>@cluster1.2vpleqx.mongodb.net/blog_list?retryWrites=true&w=majority'
 
 mongoose.connect(mongoUrl)
 
