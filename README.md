@@ -43,16 +43,13 @@
 > "Learn React, Redux, Node.js, MongoDB, GraphQL, and TypeScript in one go! This course will introduce you to modern JavaScript-based web development."
 
 
-## Technologies used
-
-
-## Technologies used
-
-
 <!-- ROADMAP -->
 ## Roadmap
 
-- [] Updated README.md
--
-Resource:
+- [x] Updated README.md
+- [ ] Finish more parts
+
+
+## Resources:
+
 [https://fullstackopen.com/en/](https://fullstackopen.com/en/)
