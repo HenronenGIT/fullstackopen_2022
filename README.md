@@ -1,10 +1,24 @@
-# fullstackopen_2022
+# Full Stack Open 2022
 
-## Link to app
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#description">Description</a>
+    </li>
+    <li>
+      <a href="#description">Part 1</a>
+    </li>
+  </ol>
+</details>
 
-[https://wild-snowflake-7248.fly.dev/](https://wild-snowflake-7248.fly.dev/)
+## Description
+> "Learn React, Redux, Node.js, MongoDB, GraphQL, and TypeScript in one go! This course will introduce you to modern JavaScript-based web development."
 
-Helsinki University Full Stack Open course
+<!-- Table of Contents -->
+
+## Technologies used
+
 
 Resource:
 [https://fullstackopen.com/en/](https://fullstackopen.com/en/)
