@@ -7,6 +7,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "bcrypt": "^5.1.0",
+    "cross-env": "^7.0.3",
     "jsonwebtoken": "^8.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -18,7 +19,8 @@
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "dev": "nodemon index.js",
-    "test": "jest --verbose --runInBand --forceExit"
+    "test": "jest --verbose --runInBand --forceExit",
+    "start:test": "cross-env NODE_ENV=test node index.js"
   },
   "eslintConfig": {
     "extends": [

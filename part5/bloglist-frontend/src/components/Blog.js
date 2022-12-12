@@ -34,15 +34,13 @@ const Blog = ({ blog, addLike, removeBlog, user }) => {
 
 			<div style={hideWhenVisible} className='blog'>
 				{blog.title + '-' + blog.author}
-				{/* {blog.title} by {blog.author} */}
-				{/* <span className='title'>{blog.title} by {blog.author}</span> */}
-				<button onClick={applyRules}>view</button>
+				<button id='view-button' onClick={applyRules}>view</button>
 			</div>
 
 			<div style={showWhenVisible} className='extendedBlog'>
 				{blog.title} {blog.author} <button onClick={toggleVisibility}>hide</button> <br />
 				{blog.url}<br />
-				likes {blog.likes}<button onClick={() => addLike(blog)}>like</button><br />
+				likes {blog.likes}<button id='like-button' onClick={() => addLike(blog)}>like</button><br />
 				{blog.user.username}<br />
 				<button onClick={() => removeBlog(blog)} style={hideWhenNotOwned}>remove</button>
 			</div>

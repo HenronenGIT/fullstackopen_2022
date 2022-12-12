@@ -5,7 +5,7 @@ const Logout = ({ username, handleLogout }) => {
 	return (
 		<div>
 			{username} logged in
-			<button onClick={handleLogout} >logout</button>
+			<button id='logout' onClick={handleLogout} >logout</button>
 		</div>
 	)
 }
