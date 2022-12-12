@@ -19,22 +19,22 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part0">Part 0</a>
+      <a href="https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part0">Part 0 - Fundementals of Web apps</a>
     </li>
     <li>
-      <a href="https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part1">Part 1</a>
+      <a href="https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part1">Part 1 - Introduction to React</a>
     </li>
     <li>
-      <a href="https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part2">Part 2</a>
+      <a href="https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part2">Part 2 - Communicating with server</a>
     </li>
     <li>
-      <a href="https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part3">Part 3</a>
+      <a href="https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part3">Part 3 - Programming a server with NodeJS and Express</a>
     </li>
     <li>
-      <a href="https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part4">Part 4</a>
+      <a href="https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part4">Part 4 - Testing Express servers, user administration</a>
     </li>
     <li>
-      <a href="https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part5">Part 5</a>
+      <a href="https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part5">Part 5 - Testing React apps</a>
     </li>
   </ol>
 </details>
