@@ -15,8 +15,8 @@
 </div>
 
 <!-- Table of Contents -->
-<details>
-  <summary>Table of Contents</summary>
+<!-- <details> -->
+<!--   <summary>Table of Contents</summary> -->
   <ol>
     <li>
       <a href="https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part0">Part 0 - Fundementals of Web apps</a>
@@ -37,7 +37,7 @@
       <a href="https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part5">Part 5 - Testing React apps</a>
     </li>
   </ol>
-</details>
+<!-- </details> -->
 
 ## Description
 > "Learn React, Redux, Node.js, MongoDB, GraphQL, and TypeScript in one go! This course will introduce you to modern JavaScript-based web development."
