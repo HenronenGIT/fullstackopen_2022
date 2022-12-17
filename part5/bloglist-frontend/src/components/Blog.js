@@ -11,21 +11,17 @@ const Blog = ({ blog, addLike, removeBlog, user }) => {
 	}
 
 	const [visible, setVisible] = useState(false)
-	const [buttonVisible, setButtonVisible] = useState(false)
+	const [removeVisible, setRemoveVisible] = useState(false)
 
 	const hideWhenVisible = { display: visible ? 'none' : '' }
 	const showWhenVisible = { display: visible ? '' : 'none' }
 
-	const hideWhenNotOwned = { display: buttonVisible ? '' : 'none' }
-
-	const toggleVisibility = () => {
-		setVisible(!visible)
-	}
+	const hideWhenNotOwned = { display: removeVisible ? '' : 'none' }
 
 	const applyRules = () => {
 		setVisible(!visible)
 		if (user.username === blog.user.username) {
-			setButtonVisible(!buttonVisible)
+			setRemoveVisible(!removeVisible)
 		}
 	}
 
@@ -38,11 +34,11 @@ const Blog = ({ blog, addLike, removeBlog, user }) => {
 			</div>
 
 			<div style={showWhenVisible} className='extendedBlog'>
-				{blog.title} {blog.author} <button onClick={toggleVisibility}>hide</button> <br />
+				{blog.title} {blog.author} <button id='hide-button' onClick={applyRules}>hide</button> <br />
 				{blog.url}<br />
 				likes {blog.likes}<button id='like-button' onClick={() => addLike(blog)}>like</button><br />
 				{blog.user.username}<br />
-				<button onClick={() => removeBlog(blog)} style={hideWhenNotOwned}>remove</button>
+				<button id='remove-button' onClick={() => removeBlog(blog)} style={hideWhenNotOwned}>remove</button>
 			</div>
 		</div>
 	)

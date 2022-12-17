@@ -8,7 +8,6 @@ const helper = require('./test_helper')
 const bcrypt = require('bcrypt')
 const User = require('../models/user')
 
-
 beforeEach(async () => {
 	await Blog.deleteMany({})
 	const blogObjects = helper.initialBlogs
