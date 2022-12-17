@@ -67,14 +67,22 @@ describe('Blog app', function () {
 
 		it('A blog can be deleted by who made it', function () {
 			cy.contains('New Blog').click()
-			cy.get('#title').type(newBlog.title)
-			cy.get('#author').type(newBlog.author)
-			cy.get('#url').type(newBlog.url)
-			cy.get('#create-button').click()
+			cy.createBlog({title: newBlog.title, author: newBlog.author, url: newBlog.url})
 			cy.get('#view-button').click()
-			//! Remove button does not appear in Cypress
-			// cy.get('#remove-button').click()
+			cy.contains(`${newBlog.title}`)
+			cy.get('#remove-button').click()
+			cy.get('#view-button').should('not.exist')
 		})
 
+		it.only('A blog with most likes is first', function () {
+			cy.contains('New Blog').click()
+			cy.createBlog({title: "Most likes", author: "1st", url: "1st", likes: 42})
+			cy.createBlog({title: "Second most likes", author: "2nd author", url: "2nd url", likes: 21})
+			cy.createBlog({title: "3rd most likes", author: "2nd author", url: "2nd url", likes: 1})
+
+			cy.get('.blog').eq(0).should('contain', 'Most likes')
+			cy.get('.blog').eq(1).should('contain', 'Second most likes')
+			cy.get('.blog').eq(2).should('contain', '3rd most likes')
+		})
 	})
 })

@@ -81,6 +81,7 @@ const App = () => {
 				setTimeout(() => {
 					setSuccessMessage(null)
 				}, 5000)
+				console.log(returnedBlog)
 				setBlogs(blogs.concat(returnedBlog))
 			})
 	}
@@ -95,6 +96,7 @@ const App = () => {
 			.then(() => {
 				setBlogs(blogs.map(blog => blog.id !== oldBlog.id ? blog : changedBlog))
 			})
+		blogs.sort(compareLikes)
 	}
 
 	const removeBlog = (removableBlog) => {
