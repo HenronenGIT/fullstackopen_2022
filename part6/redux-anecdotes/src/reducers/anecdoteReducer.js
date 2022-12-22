@@ -25,7 +25,7 @@ const reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case 'VOTE_ANECDOTE': {
 			const id = action.data.id
-			const anecdoteToChange = state.find(e => e.id == id)
+			const anecdoteToChange = state.find(e => e.id === id)
 			const changedAnecdote = {
 				...anecdoteToChange,
 				votes: anecdoteToChange.votes += 1
@@ -39,8 +39,6 @@ const reducer = (state = initialState, action) => {
 
 		default: return state
 	}
-
-	return state
 }
 
 export const voteAnecdote = (id) => {
