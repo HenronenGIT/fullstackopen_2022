@@ -5,8 +5,9 @@ const AnecdoteList = () => {
 
 	const dispatch = useDispatch()
 
-	const anecdotes = useSelector(anecdotes => {
-		return [...anecdotes].sort((a, b) => {
+	const anecdotes = useSelector(reducer => {
+		return [...reducer.anecdotes]
+		.sort((a, b) => {
 			return b.votes - a.votes
 		})
 	})
