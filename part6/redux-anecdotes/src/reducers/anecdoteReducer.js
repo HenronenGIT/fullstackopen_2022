@@ -35,14 +35,13 @@ const anecdoteSlice = createSlice({
 			const id = action.payload
 			const anecdoteToVote = state.find(a => a.id === id)
 
+			//! How it is working?
 			const changedAnecdote = {
 				...anecdoteToVote,
 				votes: anecdoteToVote.votes += 1
 			}
 			
 			console.log(changedAnecdote)
-			// return state.map(a =>
-				// a.id !== id ? a : changedAnecdote)
 		},
 	}
 })

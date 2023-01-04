@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux'
-// import { voteAnecdote } from '../reducers/anecdoteReducer'
 
 const AnecdoteList = () => {
 
@@ -14,7 +13,6 @@ const AnecdoteList = () => {
 
 	const vote = (id) => {
 		dispatch({ type: 'anecdotes/voteAnecdote', payload: id })
-		// console.log('vote', id)
 	}
 
 	return (
