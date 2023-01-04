@@ -11,8 +11,12 @@ const AnecdoteList = () => {
 			})
 	})
 
-	const vote = (id) => {
-		dispatch({ type: 'anecdotes/voteAnecdote', payload: id })
+	const vote = (anecdote) => {
+		dispatch({ type: 'anecdotes/voteAnecdote', payload: anecdote.id })
+		dispatch({ type: 'notification/voteNotification', payload: anecdote.content})
+		setTimeout(() => {
+			dispatch({ type: 'notification/resetNotification'})
+		}, 5000)
 	}
 
 	return (
@@ -23,7 +27,7 @@ const AnecdoteList = () => {
 				</div>
 				<div>
 					has {anecdote.votes}
-					<button onClick={() => vote(anecdote.id)}>vote</button>
+					<button onClick={() => vote(anecdote)}>vote</button>
 				</div>
 			</div>
 		)
