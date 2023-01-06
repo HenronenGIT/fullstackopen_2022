@@ -17,14 +17,19 @@ const notificationSlice = createSlice({
 
 export const { voteNotification, addNotification, putNotification, resetNotification } = notificationSlice.actions
 
+// For reseting setTimeour() timer
+let timeoutID
+
 export const setNotification = (msg, time) => {
+	clearTimeout(timeoutID)
 	const milliSeconds = time * 1000
 	return async dispatch => {
 		dispatch(putNotification(msg))
-		setTimeout(() => {
+		timeoutID = setTimeout(() => {
 			dispatch(resetNotification())
-		},milliSeconds)
+		}, milliSeconds)
 	}
+
 }
 
 export default notificationSlice.reducer
