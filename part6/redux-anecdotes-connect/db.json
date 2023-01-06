@@ -32,8 +32,13 @@
     },
     {
       "content": "New anecdote",
-      "votes": 1,
+      "votes": 3,
       "id": "HbanSuf"
+    },
+    {
+      "content": "new",
+      "votes": 2,
+      "id": "SJ3XRbS"
     }
   ]
 }
