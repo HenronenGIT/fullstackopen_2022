@@ -4,7 +4,8 @@ import { useField } from './hooks'
 import {
 	Routes, Route, Link,
 	useNavigate,
-	useMatch
+	useMatch,
+	// useFetcher
 } from "react-router-dom"
 
 const Menu = () => {
@@ -88,14 +89,23 @@ const CreateNew = ({ addNew, setNotification }) => {
 		}, 5000)
 	}
 
+	const resetFields = (event) => {
+		event.preventDefault()
+		content.setValue('')
+		author.setValue('')
+		info.setValue('')
+	}
+
 	return (
 		<div>
 			<h2>create a new anecdote</h2>
-			<form onSubmit={handleSubmit}>
+			{/* <form onSubmit={handleSubmit}> */}
+			<form >
 				<div>content<input {...content} /></div>
 				<div>author<input {...author} /></div>
 				<div>url for more info<input {...info} /></div>
-				<button>create</button>
+				<button onClick={handleSubmit}>create</button>
+				<button onClick={resetFields}>reset</button>
 			</form>
 		</div>
 	)
@@ -127,7 +137,6 @@ const App = () => {
 	const [notification, setNotification] = useState('')
 
 	const addNew = (anecdote) => {
-		console.log("addnew", anecdote)
 		anecdote.id = Math.round(Math.random() * 10000)
 		setAnecdotes(anecdotes.concat(anecdote))
 	}
