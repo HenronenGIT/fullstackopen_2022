@@ -22,16 +22,19 @@ const useCountry = (name) => {
 
 	//? could this be done with async
 	useEffect(() => {
-		if (!name)
-			return
-		axios.get(`${baseUrl}${name}${extension}`)
-			.then(response => {
+
+		const fetchCountry = async () => {
+			try {
+				const response = await axios.get(`${baseUrl}${name}${extension}`)
 				setCountry(response.data[0])
-			})
-			.catch(error => {
+			}
+			catch (error) {
 				setCountry(null)
 				console.log(error.response.status)
-			})
+			}
+		}
+		if (name)
+			fetchCountry()
 	}, [name])
 	return country
 }
@@ -62,7 +65,7 @@ const App = () => {
 
 	return (
 		<div>
-			<form  onSubmit={fetch}>
+			<form onSubmit={fetch}>
 				<input {...nameInput} />
 				<button>find</button>
 			</form>
