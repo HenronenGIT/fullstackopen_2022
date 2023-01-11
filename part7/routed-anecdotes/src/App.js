@@ -68,6 +68,7 @@ const Footer = () => (
 )
 
 const CreateNew = ({ addNew, setNotification }) => {
+
 	const content = useField('text')
 	const author = useField('text')
 	const info = useField('text')
@@ -91,19 +92,24 @@ const CreateNew = ({ addNew, setNotification }) => {
 
 	const resetFields = (event) => {
 		event.preventDefault()
-		content.setValue('')
-		author.setValue('')
-		info.setValue('')
+		content.reset()
+		author.reset()
+		info.reset()
+	}
+
+	const ignoreResetKey = (content) => {
+		const { reset, ...copy } = content
+		return copy
 	}
 
 	return (
 		<div>
 			<h2>create a new anecdote</h2>
-			{/* <form onSubmit={handleSubmit}> */}
 			<form >
-				<div>content<input {...content} /></div>
-				<div>author<input {...author} /></div>
-				<div>url for more info<input {...info} /></div>
+				{/* <div>content<input {...content} /></div> */}
+				<div>content<input {...ignoreResetKey(content)} /></div>
+				<div>author<input {...ignoreResetKey(author)} /></div>
+				<div>url for more info<input {...ignoreResetKey(info)} /></div>
 				<button onClick={handleSubmit}>create</button>
 				<button onClick={resetFields}>reset</button>
 			</form>
