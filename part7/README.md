@@ -1,6 +1,6 @@
 # Part 7 - React router, custom hooks, styling app with CSS and webpack
 
-<!-- > 
+> 
 
 ## Tech used
 
@@ -12,9 +12,64 @@
 
 ## What I learned
 
-- Using the Redux library by removing states from React components by using hooks API `useSelector` and `useDispatch`.
-- Difference between <em>controlled</em> and <em>uncontrolled</em> HTML forms.
-- Using Redux toolkit for combining reducers with `createSlice`.
-- Refreshing memory by using `JSON-server` again.
-- Used Redux thunk library for seperating action controllers from React components.
-- Small glance to `connect` function, old way to handle Redux. -->
+### Custom hooks
+
+Great way to call two different endpoints with same useResource custom hook.
+<details>
+<summary>Code snippet from `useResource` custom hook</summary>
+
+```JavaScript
+const App = () => {
+	//...
+	const [notes, noteService] = useResource('http://localhost:3005/notes')
+	const [persons, personService] = useResource('http://localhost:3005/persons')
+
+	const handleNoteSubmit = (event) => {
+		event.preventDefault()
+		noteService.create({ content: content.value })
+			.then((response) => {
+				noteService.setResources(notes.concat(response.data))
+			})
+//...
+```
+
+```JavaScript
+const useResource = (baseUrl) => {
+	const [resources, setResources] = useState([])
+
+	const getAll = async () => {
+		try {
+			const response = await axios.get(baseUrl)
+			setResources(response.data)
+		}
+		catch (error) {
+			console.log(error)
+		}
+	}
+
+	useEffect(() => {
+		getAll()
+	}, [])
+
+	const create = async (resource) => {
+		try {
+			const response = await axios.post(`${baseUrl}`, resource)
+			return response
+		}
+		catch (error) {
+			console.log('Post error')
+		}
+	}
+
+	const service = {
+		create,
+		setResources
+	}
+
+	return [
+		resources, service
+	]
+}
+```
+
+</details>
