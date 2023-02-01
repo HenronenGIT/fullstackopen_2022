@@ -2,9 +2,17 @@ const router = require('express').Router()
 
 const { Blog } = require('../models')
 
+router.get('/', async (req, res) => {
+	console.log('test')
+})
+
+router.get('/api', async (req, res) => {
+	res.json("Hello World!")
+})
+
 router.get('/api/blogs', async (req, res) => {
 	const blogs = await Blog.findAll()
-	res.json(blogs)
+	return("Hello World")
 })
 
 // Add new blog
@@ -27,6 +35,19 @@ router.delete('/api/blogs/:id', async (req, res) => {
 		}
 	})
 	res.json({ deletedRows: deletedRows })
+})
+
+// Updating likes
+router.put('/api/blogs/:id', async (req, res) => {
+	try {
+		// const fetchedBlog = await Blog.findByPk(req.params.id)
+		await Blog.update({likes: req.params.id})
+	}
+	catch(e) {
+		res.status(404).end()
+	}
+	
+	console.log(fetchedBlog)
 })
 
 module.exports = router
