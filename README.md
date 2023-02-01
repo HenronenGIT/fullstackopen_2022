@@ -55,6 +55,9 @@
 - [ ] Finish at least TypeScript and Relational Database part
 - [ ] Get the certificate
 
+## Certificate of Completion
+
+<img src="https://user-images.githubusercontent.com/69038136/214557452-e3bdf604-6804-4fb2-8dc2-199f6c1f78cc.png" alt="certificate" width="60%"/>
 
 ## Resources:
 
