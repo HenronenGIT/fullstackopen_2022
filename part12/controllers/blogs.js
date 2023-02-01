@@ -3,20 +3,12 @@ const router = require('express').Router()
 const { Blog } = require('../models')
 
 router.get('/', async (req, res) => {
-	console.log('test')
-})
-
-router.get('/api', async (req, res) => {
-	res.json("Hello World!")
-})
-
-router.get('/api/blogs', async (req, res) => {
 	const blogs = await Blog.findAll()
-	return("Hello World")
+	res.json(blogs)
 })
 
 // Add new blog
-router.post('/api/blogs', async (req, res) => {
+router.post('/', async (req, res) => {
 	try {
 		console.log(req.body)
 		const blog = await Blog.create(req.body)
