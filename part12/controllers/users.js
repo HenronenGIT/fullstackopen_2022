@@ -1,10 +1,15 @@
 const router = require('express').Router()
 
 const { User } = require('../models')
+const { Blog } = require('../models')
 
 // Get all the users
 router.get('/', async (req, res) => {
-	const users = await User.findAll()
+	const users = await User.findAll({
+		include: {
+			model: Blog
+		}
+	})
 	res.json(users)
 })
 
@@ -24,7 +29,7 @@ router.put('/:username', async (req, res) => {
 			username: req.params.username
 		}
 	})
-	const updatedUser = await userToUpdate.update({"username": body.username})
+	const updatedUser = await userToUpdate.update({ "username": body.username })
 	res.status(200).json(updatedUser)
 })
 // router.get('/', async (req, res) => {
