@@ -25,7 +25,6 @@ const tokenExtractor = (req, res, next) => {
 	} else {
 		return res.status(401).json({ error: 'token missing' })
 	}
-
 	next()
 }
 
@@ -33,26 +32,19 @@ const tokenExtractor = (req, res, next) => {
 router.post('/', tokenExtractor, async (req, res) => {
 	const user = await User.findByPk(req.decodedToken.id)
 	const blog = await Blog.create({...req.body, userId: user.id, date: new Date()})
-	// const blog = await Blog.create({ ...req.body, userId: user.id })
-
-	// const blog = await Blog.create(req.body)
 	res.status(202).json(blog)
 })
-// router.post('/', async (req, res) => {
-// 	const user = await User.findOne()
-// 	const blog = await Blog.create({ ...req.body, userId: user.id })
-// 	// const blog = await Blog.create(req.body)
-// 	res.status(202).json(blog)
-// })
 
 // Deleting one blog
-router.delete('/:id', async (req, res) => {
-	const deletedRows = await Blog.destroy({
+router.delete('/:id', tokenExtractor, async (req, res) => {
+	const user = await User.findByPk(req.decodedToken.id)
+	const deletedBlog = await Blog.destroy({
 		where: {
+			userId: user.id,
 			id: req.params.id
 		}
 	})
-	return res.status(204).json({ "deletedRows": deletedRows })
+	return res.status(204).json(deletedBlog)
 })
 
 // Updating likes of the single blog
