@@ -35,17 +35,6 @@ User.init({
 			}
 		}
 	},
-	// email: {
-	// 	type: DataTypes.STRING,
-	// 	allowNull: false,
-	// 	validate: {
-	// 		isEmail: {
-	// 			args: true,
-	// 			msg: "Validation isEmail on username failed"
-	// 		}
-
-	// 	}
-	// }
 }, {
 	sequelize,
 	underscored: true,

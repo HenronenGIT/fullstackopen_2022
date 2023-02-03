@@ -7,7 +7,12 @@ const { SECRET } = require('../util/config')
 
 // Get all the blogs
 router.get('/', async (req, res) => {
-	const blogs = await Blog.findAll()
+	const blogs = await Blog.findAll({
+		include: {	
+			model: User,
+			attributes: {exclude: ['createdAt','updatedAt']},
+		}
+	})
 	return res.status(200).json(blogs)
 })
 
@@ -31,7 +36,7 @@ const tokenExtractor = (req, res, next) => {
 // Add new blog
 router.post('/', tokenExtractor, async (req, res) => {
 	const user = await User.findByPk(req.decodedToken.id)
-	const blog = await Blog.create({...req.body, userId: user.id, date: new Date()})
+	const blog = await Blog.create({ ...req.body, userId: user.id, date: new Date() })
 	res.status(202).json(blog)
 })
 
