@@ -8,11 +8,14 @@ const { Op } = require('sequelize')
 
 // Get all the blogs
 router.get('/', async (req, res) => {
-	const where = {}
+	let where = {}
 
 	if (req.query.search) {
-		where.title = {
-			[Op.substring]: req.query.search.toLocaleLowerCase()
+		where = {
+			[Op.or]: [
+				{ title: { [Op.substring]: req.query.search.toLocaleLowerCase() } },
+				{ author: { [Op.substring]: req.query.search.toLocaleLowerCase() } }
+			]
 		}
 	}
 
