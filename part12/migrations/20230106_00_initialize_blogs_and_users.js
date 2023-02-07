@@ -22,6 +22,12 @@ module.exports = {
 				type: DataTypes.INTEGER,
 				defaultValue: 0
 			},
+			created_at: {
+				type: DataTypes.DATE,
+			},
+			updated_at: {
+				type: DataTypes.DATE,
+			}
 		})
 		await queryInterface.createTable('users', {
 			id: {
@@ -53,6 +59,12 @@ module.exports = {
 					}
 				}
 			},
+			created_at: {
+				type: DataTypes.DATE,
+			},
+			updated_at: {
+				type: DataTypes.DATE,
+			}
 		})
 		await queryInterface.addColumn('blogs', 'user_id', {
 			type: DataTypes.INTEGER,
