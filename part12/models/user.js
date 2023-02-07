@@ -28,16 +28,15 @@ User.init({
 				msg: '[username] cannot be empty'
 			},
 			isEmail: {
-				isEmail: {
-					args: true,
-					msg: "Validation isEmail on username failed"
-				}
+				args: true,
+				msg: "Validation isEmail on username failed"
 			}
 		}
 	},
 }, {
 	sequelize,
 	underscored: true,
+	timestamps: true,
 	modelName: 'user'
 })
 
