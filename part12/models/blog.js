@@ -21,7 +21,7 @@ Blog.init({
 	},
 	likes: {
 		type: DataTypes.INTEGER,
-		defaultValue: 0
+	defaultValue: 0
 	},
 	// year: {
 	// 	type: DataTypes.INTEGER,
@@ -33,7 +33,7 @@ Blog.init({
 }, {
 	sequelize,
 	underscored: true,
-	timestamps: true,
+	timestamps: false,
 	modelName: 'blog'
 })
 
