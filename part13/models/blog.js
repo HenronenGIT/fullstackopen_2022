@@ -30,7 +30,7 @@ Blog.init({
 			min: 1991,
 			max: new Date().getFullYear()
 		}
-	}
+	},
 }, {
 	sequelize,
 	underscored: true,

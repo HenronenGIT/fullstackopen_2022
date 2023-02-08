@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js",
     "connect": "flyctl postgres connect -a blog-database",
-	"proxy": "flyctl proxy 5432 -a blog-database "
+	"proxy": "flyctl proxy 5432 -a blog-database ",
+	"migration:down": "node util/rollback.js"
   },
   "author": "",
   "license": "ISC",
