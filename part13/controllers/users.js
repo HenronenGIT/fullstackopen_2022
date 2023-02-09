@@ -1,7 +1,7 @@
 const router = require('express').Router()
-
-const { User } = require('../models')
-const { Blog } = require('../models')
+const { QueryTypes } = require('sequelize')
+const { sequelize } = require('../util/db')
+const { User, Blog, ReadingList } = require('../models')
 
 // Get all the users
 router.get('/', async (req, res) => {
@@ -12,6 +12,32 @@ router.get('/', async (req, res) => {
 	})
 	res.json(users)
 })
+
+// GET one user
+router.get("/:id", async (req, res) => {
+	const { id } = req.params;
+
+	const user = await User.findByPk(
+		id, {
+		attributes: { exclude: ['updatedAt', 'createdAt', 'id'] },
+
+		include: [
+			{
+				model: Blog, as: "readings",
+				attributes: { exclude: ['updatedAt', 'createdAt', 'userId'] },
+			},
+			{
+				model: Blog,
+				as: "readings",
+			},
+		],
+	});
+	if (user) {
+		res.json(user);
+	} else {
+		res.status(404).end();
+	}
+});
 
 // Create a new user
 router.post('/', async (req, res) => {
