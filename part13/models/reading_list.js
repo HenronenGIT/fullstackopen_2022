@@ -9,9 +9,18 @@ ReadingList.init({
 		primaryKey: true,
 		autoIncrement: true
 	},
-	unread: {
+	blogId: {
 		type: DataTypes.BOOLEAN,
 		allowNull: false,
+		references: { model: 'blogs', key: 'id' }
+	},
+	userId: {
+		type: DataTypes.BOOLEAN,
+		allowNull: false,
+		references: { model: 'users', key: 'id' }
+	},
+	unread: {
+		type: DataTypes.BOOLEAN,
 		defaultValue: true
 	},
 }, {
@@ -20,5 +29,6 @@ ReadingList.init({
 	timestamps: false,
 	modelName: 'reading_list'
 })
+
 
 module.exports = ReadingList
