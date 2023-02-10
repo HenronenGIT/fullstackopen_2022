@@ -41,8 +41,6 @@ router.post('/', async (req, res) => {
 // Change user username
 router.put('/:username', async (req, res) => {
 	body = req.body
-	console.log(body)
-	console.log(req.params.username)
 	const userToUpdate = await User.findOne({
 		where: {
 			username: req.params.username
@@ -50,6 +48,16 @@ router.put('/:username', async (req, res) => {
 	})
 	const updatedUser = await userToUpdate.update({ "username": body.username })
 	res.status(200).json(updatedUser)
+})
+
+router.delete('/:id', async (req, res) => {
+	const { id } = req.params
+	const deletedRows = await User.destroy({
+		where: {
+			id: id
+		}
+	})
+	res.status(200).json(deletedRows)
 })
 
 module.exports = router
