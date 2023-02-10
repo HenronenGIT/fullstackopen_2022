@@ -25,7 +25,6 @@ Blog.init({
 	},
 	year: {
 		type: DataTypes.INTEGER,
-		allowNull: false,
 		validate: {
 			min: 1991,
 			max: new Date().getFullYear()

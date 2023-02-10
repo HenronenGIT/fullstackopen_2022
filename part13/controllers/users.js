@@ -18,20 +18,13 @@ router.get("/:id", async (req, res) => {
 	const { id } = req.params;
 
 	const user = await User.findByPk(
-		id, {
-		attributes: { exclude: ['updatedAt', 'createdAt', 'id'] },
-
-		include: [
-			{
-				model: Blog, as: "readings",
-				attributes: { exclude: ['updatedAt', 'createdAt', 'userId'] },
-			},
-			{
-				model: Blog,
-				as: "readings",
-			},
-		],
-	});
+		id,
+		{
+			include: [
+				{ model: Blog, as: "blogs", attributes: { exclude: ['createdAt', 'updatedAt'] } },
+				{ model: Blog, as: "readings", through: { attributes: ["id", "unread"], as: "readinglists", }, },
+			],
+		});
 	if (user) {
 		res.json(user);
 	} else {
