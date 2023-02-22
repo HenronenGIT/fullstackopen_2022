@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js",
-    "connect": "flyctl postgres connect -a blog-database",
+    "connect": "flyctl postgres connect -a part13-database",
 	"proxy": "flyctl proxy 5432 -a part13-database",
 	"migration:down": "node util/rollback.js"
   },
