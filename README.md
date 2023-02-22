@@ -40,6 +40,9 @@
     <li>
       <a href="https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part6">Part 6 - State managment with Redux</a>
     </li>
+      <li>
+      	<a href="https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part13">Part 13 - Using relational databases</a>
+    </li>
   </ol>
 <!-- </details> -->
 
@@ -52,7 +55,8 @@
 
 - [x] Updated README.md
 - [ ] Finish part 7
-- [ ] Finish at least TypeScript and Relational Database part
+- [ ] Finish TypeScript
+- [x] Finish Relational Database part
 - [x] Get the certificate
 
 ## Certificate of Completion
