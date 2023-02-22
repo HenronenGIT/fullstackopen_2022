@@ -9,11 +9,6 @@ Session.init({
 		primaryKey: true,
 		autoIncrement: true,
 	},
-	is_active: {
-		type: DataTypes.BOOLEAN,
-		defaultValue: true,
-		allowNull: false
-	},
 	user_id: {
 		type: DataTypes.INTEGER,
 		allowNull: false,

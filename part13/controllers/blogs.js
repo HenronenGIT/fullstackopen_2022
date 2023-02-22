@@ -5,7 +5,6 @@ const { Op } = require('sequelize')
 
 const tokenExtractor = require('../middlewares/tokenExtractor')
 
-
 // Get all the blogs
 router.get('/', async (req, res) => {
 	let where = {}
@@ -37,8 +36,8 @@ router.get('/', async (req, res) => {
 // Add new blog
 router.post('/', tokenExtractor, async (req, res) => {
 	const id  = req.decodedToken.id
-	// const user = await User.findByPk(req.decodedToken.id)
 	const user = await User.findByPk(id)
+	console.log(user)
 	const blog = await Blog.create({ ...req.body, userId: user.id, date: new Date() })
 	res.status(202).json(blog)
 })
