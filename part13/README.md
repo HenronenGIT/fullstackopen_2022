@@ -14,6 +14,11 @@
 
 - How to make queries by using Sequelize ORM library
 - How to create database models with Sequalize
+- What are database transactions
+- Database migrations
+
+## Blog Model
+
 ```javascript
 class Blog extends Model { }
 Blog.init({
@@ -44,7 +49,7 @@ Blog.init({
 })
 ```
 
-- How to make database migrations
+## Database migration
 
 ```javascript
 const { DataTypes } = require('sequelize')
@@ -77,4 +82,24 @@ module.exports = {
 		await queryInterface.dropTable('blogs')
 	},
 }
+```
+
+## Database transaction
+
+```js
+await sequelize.transaction(async (t) => {
+			await sequelize.query(
+				`DELETE FROM sessions WHERE user_id = ?`, {
+				replacements: [user.id]
+			})
+			await sequelize.query(
+				`INSERT INTO sessions (user_id, token)
+					VALUES (?, ?)`, {
+				replacements: [user.id, token]
+			})
+			sequelize.query(
+				'UPDATE users SET active = ? WHERE id = ?', {
+				replacements: [true, user.id],
+			})
+		})
 ```
