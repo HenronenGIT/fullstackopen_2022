@@ -2,8 +2,8 @@ const jwt = require('jsonwebtoken')
 const router = require('express').Router()
 
 const { SECRET } = require('../util/config')
-const User = require('../models/user')
 const { sequelize } = require('../util/db')
+const User = require('../models/user')
 
 router.post('/', async (request, response) => {
 	const body = request.body
@@ -13,7 +13,6 @@ router.post('/', async (request, response) => {
 				username: body.username
 			}
 		})
-		// console.log(user.id)
 		const passwordCorrect = body.password === 'secret'
 
 		if (!(user && passwordCorrect)) {
@@ -30,8 +29,6 @@ router.post('/', async (request, response) => {
 		const token = jwt.sign(userForToken, SECRET)
 
 		await sequelize.transaction(async (t) => {
-			//TODO remove variable if not needed
-			//TODO Database transactions
 			await sequelize.query(
 				`DELETE FROM sessions WHERE user_id = ?`, {
 				replacements: [user.id]
