@@ -4,6 +4,20 @@ const { Blog, User } = require('../models')
 const { Op } = require('sequelize')
 
 const tokenExtractor = require('../middlewares/tokenExtractor')
+// const sequelize = require('sequelize')
+const { sequelize } = require('../util/db')
+
+
+const validToken = async (id, token) => {
+	const response = await sequelize.query(`
+	SELECT * FROM sessions WHERE user_id = ? AND token = ?`, {
+		replacements: [id, token]
+	})
+	if (response.rowCount) {
+		return true
+	}
+	return false
+}
 
 // Get all the blogs
 router.get('/', async (req, res) => {
@@ -35,11 +49,23 @@ router.get('/', async (req, res) => {
 
 // Add new blog
 router.post('/', tokenExtractor, async (req, res) => {
-	const id  = req.decodedToken.id
-	const user = await User.findByPk(id)
-	console.log(user)
-	const blog = await Blog.create({ ...req.body, userId: user.id, date: new Date() })
-	res.status(202).json(blog)
+	try {
+		const id = req.decodedToken.id
+		const user = await User.findByPk(id)
+		if (!user.active) {
+			res.status(401).send({ message: "User is not logged in" })
+		}
+		if (!validToken(id, req.token)) {
+			res.status(401).send({ message: "User is missing a token." })
+		}
+		else {
+			const blog = await Blog.create({ ...req.body, userId: user.id, date: new Date() })
+			res.status(202).json(blog)
+		}
+	} catch (error) {
+		console.log(error)
+		res.status(401).json(error)
+	}
 })
 
 // Deleting one blog
