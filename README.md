@@ -15,37 +15,16 @@
 	<img src="https://img.shields.io/badge/Cypress-17202C?style=for-the-badge&logo=cypress&logoColor=white"></img>
 </div>
 
-<!-- Table of Contents -->
-<!-- <details> -->
-<!--   <summary>Table of Contents</summary> -->
-  <ol>
-    <li>
-      <a href="https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part0">Part 0 - Fundementals of Web apps</a>
-    </li>
-    <li>
-      <a href="https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part1">Part 1 - Introduction to React</a>
-    </li>
-    <li>
-      <a href="https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part2">Part 2 - Communicating with server</a>
-    </li>
-    <li>
-      <a href="https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part3">Part 3 - Programming a server with NodeJS and Express</a>
-    </li>
-    <li>
-      <a href="https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part4">Part 4 - Testing Express servers, user administration</a>
-    </li>
-    <li>
-      <a href="https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part5">Part 5 - Testing React apps</a>
-    </li>
-    <li>
-      <a href="https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part6">Part 6 - State managment with Redux</a>
-    </li>
-  </ol>
-<!-- </details> -->
-
 ## Description
 > "Learn React, Redux, Node.js, MongoDB, GraphQL, and TypeScript in one go! This course will introduce you to modern JavaScript-based web development."
 
+- [Part 1 - Introduction to React](https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part13)
+- [Part 2 - Communicating with Server](https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part13)
+- [Part 3 - Programming a server with Node.js and Express](https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part13)
+- [Part 4 - Testing Express servers, user administration](https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part13)
+- [Part 5 - Testing React apps](https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part13)
+- [Part 6 - State management with Redux](https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part13)
+- [Part 13 - Relational Databases](https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part13)
 
 <!-- ROADMAP -->
 ## Roadmap
