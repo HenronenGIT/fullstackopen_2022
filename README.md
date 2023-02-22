@@ -31,7 +31,8 @@
 
 - [x] Updated README.md
 - [ ] Finish part 7
-- [ ] Finish at least TypeScript and Relational Database part
+- [ ] Finish TypeScript
+- [x] Finish the Relational Database part
 - [x] Get the certificate
 
 ## Certificate of Completion
