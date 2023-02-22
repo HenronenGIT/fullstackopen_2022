@@ -18,12 +18,14 @@
 ## Description
 > "Learn React, Redux, Node.js, MongoDB, GraphQL, and TypeScript in one go! This course will introduce you to modern JavaScript-based web development."
 
-- [Part 1 - Introduction to React](https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part13)
-- [Part 2 - Communicating with Server](https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part13)
-- [Part 3 - Programming a server with Node.js and Express](https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part13)
-- [Part 4 - Testing Express servers, user administration](https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part13)
-- [Part 5 - Testing React apps](https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part13)
-- [Part 6 - State management with Redux](https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part13)
+- [Part 0 - Fundamentals of Web App](https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part00)
+- [Part 1 - Introduction to React](https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part01)
+- [Part 2 - Communicating with Server](https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part02)
+- [Part 3 - Programming a server with Node.js and Express](https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part03)
+- [Part 4 - Testing Express servers, user administration](https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part04)
+- [Part 5 - Testing React apps](https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part05)
+- [Part 6 - State management with Redux](https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part06)
+- [Part 7 - React router, custom hooks, styling with CSS and webpack](https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part07)
 - [Part 13 - Relational Databases](https://github.com/HenronenGIT/fullstackopen_2022/tree/main/part13)
 
 <!-- ROADMAP -->
