@@ -83,8 +83,9 @@ const CreateNew = ({ addNew, setNotification }) => {
 			info: info.value,
 			votes: 0
 		})
+		console.log('%cApp.js line:86 content', 'color: #007acc;', content);
 		navigate('/')
-		setNotification(`A new anecdote '${content}' created!`)
+		setNotification(`A new anecdote '${content.value}' created!`)
 		setTimeout(() => {
 			setNotification('')
 		}, 5000)
