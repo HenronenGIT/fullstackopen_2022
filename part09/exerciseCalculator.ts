@@ -1,57 +1,42 @@
+import {
+  countArrayAverage,
+  calcRating,
+  countOfPositives,
+  giveRatingDescription,
+} from "./utils";
+
 interface returnValues {
   periodLength: number;
   trainingDays: number;
   success: boolean;
   rating: number;
   ratingDescription: string;
-  description: string;
-  target: 1 | 2 | 3;
+  target: number;
   average: number;
 }
 
-const calculateExercises = (exercise_days: number[], target: number) => {
+const calculateExercises = (
+  exercise_days: number[],
+  target: number
+): returnValues => {
+  if (exercise_days.length < 1) {
+    throw new Error("No exercises were given");
+  }
+  if (target < 1) {
+    throw new Error("Target must be greater than 0");
+  }
+
   const periodLength = exercise_days.length;
+  const trainingDays = countOfPositives(exercise_days);
+  const average = countArrayAverage(exercise_days);
+  const success = trainingDays >= target ?? true;
+  const rating = calcRating(trainingDays);
+  const ratingDescription = giveRatingDescription(rating);
 
-  let trainingDays = 0;
-  exercise_days.forEach((element) => {
-    if (element > 0) {
-      trainingDays += 1;
-    }
-  });
-
-  const average = exercise_days.reduce((accumulator, currentValue) => {
-    return accumulator + currentValue / periodLength;
-  }, 0);
-
-  const sucess = trainingDays >= target ?? true;
-
-  let rating = 0;
-
-  if (trainingDays >= 3) {
-    rating = 3;
-  } else if (trainingDays <= 2 && trainingDays > 1) {
-    rating = 2;
-  } else {
-    rating = 1;
-  }
-
-  let ratingDescription;
-  switch (rating) {
-    case 3:
-      ratingDescription = "Fantastic!";
-      break;
-    case 2:
-      ratingDescription = "Medicore";
-      break;
-    case 1:
-      ratingDescription = "We need to work on something";
-    default:
-      break;
-  }
   return {
     periodLength,
     trainingDays,
-    sucess,
+    success,
     rating,
     ratingDescription,
     target,
@@ -59,4 +44,13 @@ const calculateExercises = (exercise_days: number[], target: number) => {
   };
 };
 
-console.log(calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 2));
+// console.log(calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 2));
+
+const target: number = Number(process.argv[2]);
+const exercise_days: number[] = process.argv
+  .slice(3)
+  .map((element) => Number(element));
+
+console.log(calculateExercises(exercise_days, target));
+
+// npm run calculateExercises 2 1 0 2 4.5 0 3 1 0 4

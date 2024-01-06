@@ -1,4 +1,9 @@
 const calculateBmi = (height: number, weight: number): string => {
+  if (isNaN(height) || isNaN(weight)) {
+    throw new Error("Provided values were not numbers!");
+  }
+
+  if (height === 0 || weight === 0) throw new Error("Height or weight cannot be 0!");
   const bmi = weight / (((height / 100) * height) / 100);
 
   if (bmi <= 18.4) {
@@ -13,4 +18,7 @@ const calculateBmi = (height: number, weight: number): string => {
   return "Obese";
 };
 
-console.log(calculateBmi(180, 74));
+const height: number = Number(process.argv[2]);
+const weight: number = Number(process.argv[3]);
+
+console.log(calculateBmi(height, weight));
