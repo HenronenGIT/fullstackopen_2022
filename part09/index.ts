@@ -23,12 +23,16 @@ app.get("/bmi", (_req, res) => {
 });
 
 app.post("/exercises", (req, res) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { daily_exercises, target } = req.body;
   if (!daily_exercises || !target) {
     res.send({ error: "parameters missing" });
   }
 
-  const result = calculateExercises(daily_exercises, target);
+  const result = calculateExercises(
+    daily_exercises as number[],
+    Number(target)
+  );
   res.status(200).send(result);
 });
 
