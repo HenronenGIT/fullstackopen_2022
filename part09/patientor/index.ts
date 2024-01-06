@@ -1,9 +1,15 @@
 import express from "express";
-const cors = require("cors");
+import diagnosesRouter from "./src/routes/diagnoses.routes";
+import patientsRouter from "./src/routes/patients.routes";
+import cors from "cors";
 
 const app = express();
+
 app.use(express.json());
 app.use(cors());
+
+app.use("/api/diagnoses", diagnosesRouter);
+app.use("/api/patients", patientsRouter);
 
 const PORT = 3001;
 
