@@ -20,26 +20,12 @@ const getNonSensitivePatients = (): NonSensitivePatient[] => {
   }));
 };
 
-const addPatient = (object: unknown): NewPatientEntry => {
+const addPatient = (object: NewPatientEntry): NewPatientEntry => {
   const id = randomUUID();
-  // const newPatient = {
-  //   id,
-  //   ...object,
-  // };
-  console.log(
-    "%cpatients.service.ts line:29 object",
-    "color: #007acc;",
-    object
-  );
   const newPatient = {
     id,
-    name: "Henri Maronen",
-    dateOfBirth: "1979-01-30",
-    ssn: "300179-77A",
-    gender: "male",
-    occupation: "Test",
+    ...object,
   };
-
   patients.push(newPatient);
   return newPatient;
 };
