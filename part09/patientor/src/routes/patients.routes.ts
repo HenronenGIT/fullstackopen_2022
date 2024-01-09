@@ -15,4 +15,15 @@ patientsRouter.post("/", (req, res) => {
   res.json(newPatient);
 });
 
+patientsRouter.get("/:id", (req, res) => {
+  const { id } = req.params;
+  const patient = patientsService.getPatient(id);
+
+  if (patient) {
+    res.send(patient);
+  } else {
+    res.sendStatus(404);
+  }
+});
+
 export default patientsRouter;

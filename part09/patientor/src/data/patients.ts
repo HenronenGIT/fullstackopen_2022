@@ -54,6 +54,6 @@ const patientEntries: Patient[] = data.map((obj) => {
 //   const object = toNewDiaryEntry(obj) as DiaryEntry;
 //   object.id = obj.id;
 //   return object;
-// });
+// });vv
 
 export default patientEntries;
