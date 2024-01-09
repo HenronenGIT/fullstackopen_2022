@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-// import DiaryForm from "./assets/components/DiaryForm";
+import "./App.css";
 
 type IDiary = {
   id: number;
@@ -16,6 +16,7 @@ const baseUrl = "http://localhost:3000/api/diaries";
 
 const App = () => {
   const [diaries, setDiaries] = useState<IDiary[]>([]);
+  const [notification, setNotification] = useState<string | null>(null);
   const [newDiary, setNewDiary] = useState<INewDiaryEntry>({
     date: "",
     weather: "",
@@ -35,7 +36,15 @@ const App = () => {
         setDiaries(diaries.concat(response.data));
       })
       .catch((error) => {
-        console.log(error);
+        if (axios.isAxiosError(error)) {
+          setNotification(error.response.data);
+          setTimeout(() => {
+            setNotification(null);
+          }, 5000);
+          // Do something with this error...
+        } else {
+          console.error(error);
+        }
       });
   };
 
@@ -60,36 +69,42 @@ const App = () => {
   return (
     <>
       <div>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="name">Date:</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={newDiary.date}
-            onChange={handleDateChange}
-          />
+        <h2>Add new</h2>
+        <div className="errorMessage">
+          {notification && <p>{notification}</p>}
+        </div>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="name">Date:</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={newDiary.date}
+              onChange={handleDateChange}
+            />
 
-          <label htmlFor="visibility">Visibility:</label>
-          <input
-            type="text"
-            id="visibility"
-            name="visibility"
-            onChange={handleVisibilityChange}
-          />
+            <label htmlFor="visibility">Visibility:</label>
+            <input
+              type="text"
+              id="visibility"
+              name="visibility"
+              onChange={handleVisibilityChange}
+            />
 
-          <label htmlFor="weather">Weather:</label>
-          <input
-            type="text"
-            id="weather"
-            name="weather"
-            onChange={handleWeatherChange}
-          />
+            <label htmlFor="weather">Weather:</label>
+            <input
+              type="text"
+              id="weather"
+              name="weather"
+              onChange={handleWeatherChange}
+            />
 
-          <label htmlFor="comment">Comment:</label>
-          <input id="comment" name="comment" onChange={handleCommentChange} />
-          <button type="submit">Submit</button>
-        </form>
+            <label htmlFor="comment">Comment:</label>
+            <input id="comment" name="comment" onChange={handleCommentChange} />
+            <button type="submit">Submit</button>
+          </form>
+        </div>
       </div>
 
       <h2>Diary entries</h2>
