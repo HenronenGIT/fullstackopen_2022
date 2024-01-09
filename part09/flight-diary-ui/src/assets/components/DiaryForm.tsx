@@ -1,16 +1,28 @@
 import React from "react";
 
 interface Props {
+  // setDiaries: (diaries: {}) => void;
   // Define the props for your component here
 }
 
 const DiaryForm: React.FC<Props> = (props) => {
-  // Add your component logic here
+  //   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  //       event.preventDefault();
+  //       const newDiary = {
+  //         date: event.target.date.value,
+  //         visibility: event.target.visibility.value,
+  //         weather: event.target.weather.value,
+  //         comment: event.target.comment.value,
+  //       };
+
+  //       props.setDiaries(diaries.concat(newDiary));
+  //     };
+  //   };
 
   return (
-    <div >
+    <div>
       <form>
-        <label htmlFor="name">Date:</label>
+        <label>Date:</label>
         <input type="text" id="name" name="name" />
 
         <label htmlFor="visibility">Visibility:</label>
@@ -21,7 +33,7 @@ const DiaryForm: React.FC<Props> = (props) => {
 
         <label htmlFor="comment">Comment:</label>
         <input id="comment" name="comment" />
-        <button onSubmit={() => {}}>Submit</button>
+        {/* <button onSubmit={() => handleSubmit()}>Submit</button> */}
       </form>
     </div>
   );
