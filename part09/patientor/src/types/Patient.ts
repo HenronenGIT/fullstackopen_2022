@@ -7,8 +7,8 @@ export type Entry =
 
 interface BaseEntry {
   id: string;
-  date: string;
   type: string;
+  date: string;
   description: string;
   specialist: string;
   diagnosisCodes?: Diagnose["code"][];
@@ -20,10 +20,10 @@ interface HealthCheckEntry extends BaseEntry {
 }
 
 export enum HealthCheckRating {
-  "Healthy" = 0,
-  "LowRisk" = 1,
-  "HighRisk" = 2,
-  "CriticalRisk" = 3,
+  "Healthy" = 1,
+  "LowRisk" = 2,
+  "HighRisk" = 3,
+  "CriticalRisk" = 4,
 }
 
 interface HospitalEntry extends BaseEntry {
