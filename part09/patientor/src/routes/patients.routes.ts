@@ -1,6 +1,7 @@
 import { Router } from "express";
 import patientsService from "../services/patients.service";
-import { toNewPatientEntry } from "../utils/utils";
+import { toNewPatientEntry } from "../utils/patientParse";
+import { toNewEntry } from "../utils/entryParse";
 
 const patientsRouter = Router();
 
@@ -23,6 +24,24 @@ patientsRouter.get("/:id", (req, res) => {
     res.send(patient);
   } else {
     res.sendStatus(404);
+  }
+});
+
+patientsRouter.post("/:id/entries", (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const newEntry = toNewEntry(req.body);
+    const updatedPatient = patientsService.addEntry(newEntry, id);
+    res.json(updatedPatient);
+  } catch (e: unknown) {
+    let errorMessage = "Something went wrong: ";
+
+    if (e instanceof Error) {
+      errorMessage += e.message;
+    }
+
+    res.status(400).send(errorMessage);
   }
 });
 

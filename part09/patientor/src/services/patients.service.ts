@@ -1,4 +1,7 @@
 import {
+  Entry,
+  // Entry,vvv
+  EntryWithoutId,
   NewPatientEntry,
   NonSensitivePatient,
   Patient,
@@ -37,9 +40,29 @@ const getPatient = (id: string): Patient | undefined => {
   return patient;
 };
 
+const addEntry = (object: EntryWithoutId, patient_id: string) => {
+  const id = randomUUID();
+
+  const newEntry: Entry = {
+    id,
+    ...object,
+  };
+
+  const patient = patients.find((patient) => {
+    if (patient.id === patient_id) {
+      patient.entries.push(newEntry);
+      return patient;
+    }
+    return null;
+  });
+
+  return patient;
+};
+
 export default {
   getPatients,
   getNonSensitivePatients,
   addPatient,
   getPatient,
+  addEntry,
 };
