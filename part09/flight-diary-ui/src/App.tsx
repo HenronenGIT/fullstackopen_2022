@@ -12,7 +12,7 @@ type IDiary = {
 
 type INewDiaryEntry = Omit<IDiary, "id">;
 
-const baseUrl = "http://localhost:3000/api/diaries";
+const baseUrl = "http://localhost:3001/api/diaries";
 
 const App = () => {
   const [diaries, setDiaries] = useState<IDiary[]>([]);
