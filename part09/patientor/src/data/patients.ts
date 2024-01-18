@@ -71,7 +71,7 @@ const patients: Patient[] = [
         specialist: "MD House",
         type: "HealthCheck",
         description: "Yearly control visit. Cholesterol levels back to normal.",
-        healthCheckRating: 0,
+        healthCheckRating: 1,
       },
       {
         id: "fcd59fa6-c4b4-4fec-ac4d-df4fe1f85f62",
@@ -106,7 +106,7 @@ const patients: Patient[] = [
         specialist: "Dr Byte House",
         type: "HealthCheck",
         description: "Digital overdose, very bytestatic. Otherwise healthy.",
-        healthCheckRating: 0,
+        healthCheckRating: 1,
       },
     ],
   },
