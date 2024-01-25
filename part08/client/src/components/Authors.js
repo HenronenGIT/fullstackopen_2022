@@ -1,8 +1,5 @@
 const Authors = ({ authors }) => {
-  // if (!props.show) {
-  //   return null
-  // }
-  // const authors = [];
+
 
   return (
     <div>

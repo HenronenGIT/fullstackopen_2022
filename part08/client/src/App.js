@@ -3,14 +3,9 @@ import { useState } from "react";
 import Authors from "./components/Authors";
 import Books from "./components/Books";
 import NewBook from "./components/NewBook";
-import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 
-const client = new ApolloClient({
-  uri: "http://localhost:4000",
-  cache: new InMemoryCache(),
-});
-
-const query = gql`
+const ALL_AUTHORS = gql`
   query {
     allAuthors {
       name
@@ -20,14 +15,24 @@ const query = gql`
   }
 `;
 
+const ALL_BOOKS = gql`
+  query {
+    allBooks {
+      author
+      published
+      title
+    }
+  }
+`;
+
 const App = () => {
   const [page, setPage] = useState("authors");
-  const [authors, setAuthors] = useState([]);
 
-  client.query({ query }).then((response) => {
-    console.log(response.data);
-    setAuthors(response.data.allAuthors)
-  });
+  const result = useQuery(ALL_AUTHORS);
+  const book_result = useQuery(ALL_BOOKS);
+
+  if (result.loading) return <div>loading...</div>;
+  if (book_result.loading) return <div>loading...</div>;
 
   return (
     <div>
@@ -37,11 +42,13 @@ const App = () => {
         <button onClick={() => setPage("add")}>add book</button>
       </div>
 
-      <Authors authors={authors} show={page === "authors"} />
-
-      <Books show={page === "books"} />
-
-      <NewBook show={page === "add"} />
+      {page === "authors" ? (
+        <Authors authors={result.data.allAuthors} />
+      ) : page === "books" ? (
+        <Books books={book_result.data.allBooks} />
+      ) : (
+        <NewBook />
+      )}
     </div>
   );
 };
