@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { gql, useMutation } from "@apollo/client";
+import Select from "react-select";
 
 const UPDATE_AUTHOR = gql`
   mutation editAuthor($name: String!, $setBornTo: Int!) {
@@ -11,19 +12,29 @@ const UPDATE_AUTHOR = gql`
 `;
 
 const Authors = ({ authors }) => {
-  const [name, setName] = useState("");
   const [born, setBorn] = useState("");
+  const [selectedOption, setSelectedOption] = useState(null);
 
   const [editAuthor] = useMutation(UPDATE_AUTHOR);
 
-  const handleSubmit = (event) => {
+  const handleAuthorSubmit = (event) => {
     event.preventDefault();
     const bornInt = parseInt(born);
-
-    editAuthor({ variables: { name, setBornTo: bornInt } });
-    setName("");
-    setBorn("");
+    const name: any = selectedOption.value;
+    if (selectedOption) {
+      editAuthor({
+        variables: { name, setBornTo: bornInt },
+      });
+      setSelectedOption(null);
+      setBorn("");
+    } else {
+      console.error("No author selected");
+    }
   };
+
+  const options = authors.map((a) => {
+    return { value: a.name, label: a.name };
+  });
 
   return (
     <div>
@@ -44,13 +55,17 @@ const Authors = ({ authors }) => {
           ))}
         </tbody>
       </table>
+
       <h2>Set birthyear</h2>
-      <form onSubmit={handleSubmit}>
-        name
-        <input value={name} onChange={({ target }) => setName(target.value)} />
-        <br />
+      <form onSubmit={handleAuthorSubmit}>
+        <Select
+          defaultValue={selectedOption}
+          options={options}
+          onChange={setSelectedOption}
+        ></Select>
         born
         <input value={born} onChange={({ target }) => setBorn(target.value)} />
+        <br />
         <button type="submit">Update Author</button>
         <br />
       </form>
