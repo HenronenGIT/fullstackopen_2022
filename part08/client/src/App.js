@@ -47,7 +47,7 @@ const App = () => {
       ) : page === "books" ? (
         <Books books={book_result.data.allBooks} />
       ) : (
-        <NewBook />
+        <NewBook show={page === "add"} />
       )}
     </div>
   );
