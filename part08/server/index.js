@@ -156,14 +156,10 @@ const typeDefs = `
 
 const resolvers = {
   Query: {
-    bookCount: async () => {
-      const books = await Book.find({});
-      return books.length;
-    },
-    authorCount: async () => {
-      const authors = await Author.find({});
-      return authors.length;
-    },
+    bookCount: async () => Book.collection.countDocuments(),
+
+    authorCount: async () => await Author.collection.countDocuments(),
+
     allBooks: async (root, args) => {
       if (!args.author && !args.genre) {
         return Book.find({});
@@ -175,6 +171,7 @@ const resolvers = {
   Mutation: {
     addBook: async (root, args) => {
       try {
+
          const author = await Author.findOne({ name: args.author });
           if (!author) {
             const newAuthor = new Author({ name: args.author });
@@ -184,7 +181,7 @@ const resolvers = {
         const book = new Book({ ...args });
         return book.save();
       } catch(error) {
-        throw new GraphQLError('Saving number failed', {
+        throw new GraphQLError('Saving book failed', {
           extensions: {
             code: 'BAD_USER_INPUT',
             invalidArgs: args.name,
