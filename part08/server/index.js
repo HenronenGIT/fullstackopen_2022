@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 mongoose.set('strictQuery', false)
 
 const Book = require("./models/book");
+const Author = require("./models/author");
 
 require("dotenv").config();
 
@@ -155,22 +156,31 @@ const typeDefs = `
 
 const resolvers = {
   Query: {
-    bookCount: () => books.length,
-    authorCount: () => authors.length,
-    allBooks: (_, args) => {
-      if (args.author) {
-        return books.filter((book) => book.author === args.author);
+    bookCount: async () => {
+      const books = await Book.find({});
+      return books.length;
+    },
+    authorCount: async () => {
+      const authors = await Author.find({});
+      return authors.length;
+    },
+    allBooks: async (root, args) => {
+      if (!args.author && !args.genre) {
+        return Book.find({});
       }
-      if (args.genre) {
-        return books.filter((book) => book.genres.includes(args.genre));
-      }
-      return books;
+      return Book.find({ genres: { $in: args.genre } });
     },
     allAuthors: () => authors,
   },
   Mutation: {
     addBook: async (root, args) => {
       try {
+         const author = await Author.findOne({ name: args.author });
+          if (!author) {
+            const newAuthor = new Author({ name: args.author });
+            await newAuthor.save();
+          }
+
         const book = new Book({ ...args });
         return book.save();
       } catch(error) {
@@ -181,14 +191,7 @@ const resolvers = {
             error
           }})
       }
-      // addBook: (root, args) => {
-      //   if (!authors.includes(args.author)) {
-      //     const author = { name: args.author, id: uuid() };
-      //     authors = authors.concat(author);
-      //   }
-      //   const book = { ...args, id: uuid() };
-      //   books = books.concat(book);
-      //   return book;
+
     },
     editAuthor: (root, args) => {
       const author = authors.find((author) => author.name === args.name);
