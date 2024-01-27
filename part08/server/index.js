@@ -1,6 +1,29 @@
 const { ApolloServer } = require("@apollo/server");
 const { startStandaloneServer } = require("@apollo/server/standalone");
 const { v1: uuid } = require("uuid");
+const mongoose = require("mongoose");
+mongoose.set('strictQuery', false)
+
+const Book = require("./models/book");
+
+require("dotenv").config();
+
+const MONGODB_URI = process.env.MONGODB_URI;
+
+console.log("connecting to Mongo Database");
+
+// Connect to MongoDB
+mongoose
+  .connect(MONGODB_URI)
+  .then(() => {
+    console.log("connected to MongoDB");
+  })
+  .catch((error) => {
+    console.log("error connection to MongoDB:", error.message);
+  });
+
+mongoose.set("strictQuery", false);
+
 
 let authors = [
   {
@@ -103,7 +126,7 @@ const typeDefs = `
   type Book {
     title: String!
     published: Int!
-    author: String!
+    author: Author!
     id: ID!
     genres: [String!]
   }
@@ -146,14 +169,26 @@ const resolvers = {
     allAuthors: () => authors,
   },
   Mutation: {
-    addBook: (root, args) => {
-      if (!authors.includes(args.author)) {
-        const author = { name: args.author, id: uuid() };
-        authors = authors.concat(author);
+    addBook: async (root, args) => {
+      try {
+        const book = new Book({ ...args });
+        return book.save();
+      } catch(error) {
+        throw new GraphQLError('Saving number failed', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name,
+            error
+          }})
       }
-      const book = { ...args, id: uuid() };
-      books = books.concat(book);
-      return book;
+      // addBook: (root, args) => {
+      //   if (!authors.includes(args.author)) {
+      //     const author = { name: args.author, id: uuid() };
+      //     authors = authors.concat(author);
+      //   }
+      //   const book = { ...args, id: uuid() };
+      //   books = books.concat(book);
+      //   return book;
     },
     editAuthor: (root, args) => {
       const author = authors.find((author) => author.name === args.name);
