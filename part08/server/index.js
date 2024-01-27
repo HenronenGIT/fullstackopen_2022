@@ -6,6 +6,7 @@ mongoose.set('strictQuery', false)
 
 const Book = require("./models/book");
 const Author = require("./models/author");
+const User = require("./models/user");
 
 require("dotenv").config();
 
@@ -122,6 +123,8 @@ const typeDefs = `
     authorCount: Int!
     allBooks(author: String, genre: String): [Book!]!
     allAuthors: [Author!]!
+    me: User
+
   }
 
   type Book {
@@ -139,6 +142,16 @@ const typeDefs = `
     bookCount: Int!
   }
 
+  type User {
+    username: String!
+    favoriteGenre: String!
+    id: ID!
+  }
+
+  type Token {
+    value: String!
+  }
+
   type Mutation {
     addBook(
         title: String!
@@ -151,6 +164,16 @@ const typeDefs = `
         name: String!
         setBornTo: Int!
     ): Author
+
+    createUser(
+      username: String!
+      favoriteGenre: String!
+    ): User
+
+    login(
+      username: String!
+      password: String!
+    ): Token
   }
 `;
 
@@ -188,8 +211,8 @@ const resolvers = {
             error
           }})
       }
-
     },
+
     editAuthor:  async (root, args) => {
       const filter = { name: args.name };
       const update = { born: args.setBornTo };
@@ -206,6 +229,31 @@ const resolvers = {
       // );
       // return updatedAuthor;
     },
+    createUser: async (root, args) => {
+      try {
+      const user = new User({ username: args.username, favoriteGenre: args.favoriteGenre})
+
+
+      return user.save()
+      } catch(error) {
+        throw new GraphQLError('Creating the user failed', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.username,
+            error
+          }
+        })}
+        // .catch(error => {
+        //   throw new GraphQLError('Creating the user failed', {
+        //     extensions: {
+        //       code: 'BAD_USER_INPUT',
+        //       invalidArgs: args.username,
+        //       error
+        //     }
+        //   })
+        // }
+        // )
+      },
   },
   Author: {
     bookCount: (args) => {
