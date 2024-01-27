@@ -127,7 +127,7 @@ const typeDefs = `
   type Book {
     title: String!
     published: Int!
-    author: Author!
+    author: String!
     id: ID!
     genres: [String!]
   }
@@ -193,16 +193,21 @@ const resolvers = {
       }
 
     },
-    editAuthor: (root, args) => {
-      const author = authors.find((author) => author.name === args.name);
-      if (!author) {
-        return null;
-      }
-      const updatedAuthor = { ...author, born: args.setBornTo };
-      authors = authors.map((author) =>
-        author.name === args.name ? updatedAuthor : author
-      );
+    editAuthor:  async (root, args) => {
+      const filter = { name: args.name };
+      const update = { born: args.setBornTo };
+
+      const updatedAuthor = await Author.findOneAndUpdate(filter, update)
       return updatedAuthor;
+      // const author = authors.find((author) => author.name === args.name);
+      // if (!author) {
+      //   return null;
+      // }
+      // const updatedAuthor = { ...author, born: args.setBornTo };
+      // authors = authors.map((author) =>
+      //   author.name === args.name ? updatedAuthor : author
+      // );
+      // return updatedAuthor;
     },
   },
   Author: {
