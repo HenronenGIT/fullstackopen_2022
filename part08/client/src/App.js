@@ -4,6 +4,7 @@ import Authors from "./components/Authors";
 import Books from "./components/Books";
 import NewBook from "./components/NewBook";
 import { gql, useQuery } from "@apollo/client";
+// import LoginForm from "./components/LoginForm";
 
 const ALL_AUTHORS = gql`
   query {
@@ -27,12 +28,13 @@ const ALL_BOOKS = gql`
 
 const App = () => {
   const [page, setPage] = useState("authors");
+  // const [token, setToken] = useState(null);
 
-  const result = useQuery(ALL_AUTHORS);
-  const book_result = useQuery(ALL_BOOKS);
+  const authors_query = useQuery(ALL_AUTHORS);
+  const books_query = useQuery(ALL_BOOKS);
 
-  if (result.loading) return <div>loading...</div>;
-  if (book_result.loading) return <div>loading...</div>;
+  if (authors_query.loading) return <div>loading...</div>;
+  if (books_query.loading) return <div>loading...</div>;
 
   return (
     <div>
@@ -40,13 +42,14 @@ const App = () => {
         <button onClick={() => setPage("authors")}>authors</button>
         <button onClick={() => setPage("books")}>books</button>
         <button onClick={() => setPage("add")}>add book</button>
+        {/* <button onClick={() => setPage("login")}>login</button> */}
       </div>
-
       {page === "authors" ? (
-        <Authors authors={result.data.allAuthors} />
+        <Authors authors={authors_query.data.allAuthors} />
       ) : page === "books" ? (
-        <Books books={book_result.data.allBooks} />
+        <Books books={books_query.data.allBooks} />
       ) : (
+        // ) : page === "add" ? (
         <NewBook show={page === "add"} />
       )}
     </div>
