@@ -180,8 +180,8 @@ const resolvers = {
 
     allAuthors: () => authors,
     // allAuthors: async() => {
-      // return await Author.find({});
-      // return authors
+    // return await Author.find({});
+    // return authors
     // },
 
     me: (root, args, context) => {
@@ -191,17 +191,17 @@ const resolvers = {
 
   Mutation: {
     addBook: async (root, args, context) => {
+      const currentUser = context.currentUser;
+
+      if (!currentUser) {
+        throw new GraphQLError("not authenticated", {
+          extensions: {
+            code: "BAD_USER_INPUT",
+            status: 401,
+          },
+        });
+      }
       try {
-        const currentUser = context.currentUser;
-
-        if (!currentUser) {
-          throw new GraphQLError("not authenticated", {
-            extensions: {
-              code: "BAD_USER_INPUT",
-            },
-          });
-        }
-
         const author = await Author.findOne({ name: args.author });
         if (!author) {
           const newAuthor = new Author({ name: args.author });
@@ -303,9 +303,8 @@ const resolvers = {
         if (!count) {
           return 0;
         }
-        return count
-      }
-      catch (error) {
+        return count;
+      } catch (error) {
         throw new GraphQLError("Counting books failed", {
           extensions: {
             code: "BAD_USER_INPUT",

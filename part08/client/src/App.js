@@ -20,7 +20,7 @@ const App = () => {
   return (
     <>
       <Notify errorMessage={errorMessage} />
-      <Navbar token={token} />
+      <Navbar token={token} setToken={setToken} />
 
       <Routes>
         <Route path="/" element={<h1>Home</h1>} />
