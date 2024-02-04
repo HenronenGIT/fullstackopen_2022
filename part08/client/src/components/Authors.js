@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { gql, useMutation } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import Select from "react-select";
 
 const UPDATE_AUTHOR = gql`
@@ -11,11 +11,27 @@ const UPDATE_AUTHOR = gql`
   }
 `;
 
-const Authors = ({ authors }) => {
+const ALL_AUTHORS = gql`
+  query {
+    allAuthors {
+      name
+      born
+      bookCount
+    }
+  }
+`;
+
+const Authors = () => {
   const [born, setBorn] = useState("");
   const [selectedOption, setSelectedOption] = useState(null);
 
   const [editAuthor] = useMutation(UPDATE_AUTHOR);
+
+  const authors_query = useQuery(ALL_AUTHORS);
+
+  if (authors_query.loading) return <div>loading...</div>;
+
+  const authors = authors_query.data.allAuthors;
 
   const handleAuthorSubmit = (event) => {
     event.preventDefault();
