@@ -32,8 +32,8 @@
 ## Roadmap
 
 - [x] Updated README.md
-- [ ] Finish part 7
-- [ ] Finish TypeScript
+- [x] Finish part 7
+- [x] Finish TypeScript
 - [x] Finish the Relational Database part
 - [x] Get the certificate
 
